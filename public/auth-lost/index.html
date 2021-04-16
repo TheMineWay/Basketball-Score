@@ -1,0 +1,62 @@
+<!-- Created by TheMineWay (Joel Campos Oliva) -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>Score</title>
+  </head>
+  <body>
+    <br>
+    <section class="container">
+        <div class="card mb-3">
+            <div class="card-header">Recover password</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="email" id="recover_email" class="form-control" placeholder="Email address...">
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="_Recover()" id="recover_btn">Recover password</button>
+                    </div>
+                    <div class="col-md-12" id="recover_error" hidden></div>
+                </div>
+            </div>
+        </div>
+        <a href="/admin-auth">Go back to login</a>
+    </section>
+
+    <!-- END PRACTICAL BODY -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+
+    <script src="/js/firebase_config.js"></script>
+
+    <script src="../js/common.js"></script>
+    <script>
+        if (location.hostname === "localhost") {
+            firebase.auth().useEmulator("http://localhost:9099");
+        }
+        function _Recover() {
+            const email = document.getElementById("recover_email").value;
+            ResetError("recover_error");
+            firebase.auth().sendPasswordResetEmail(email).then(function() {
+                SetInfo("recover_error",`Email recovery link sent to <b>${email}</b>.`);
+                document.getElementById("recover_btn").setAttribute("disabled","");
+            }).catch(function(error) {
+                SetError("recover_error",error.message);
+            });
+        }
+    </script>
+  </body>
+</html>

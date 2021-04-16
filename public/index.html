@@ -1,0 +1,52 @@
+<!-- Created by TheMineWay (Joel Campos Oliva) -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <style>
+      *  {
+        font-size: x-large;
+      }
+      th, td {
+        padding-left: 1rem;
+      }
+      .score {
+        font-size: xx-large;
+        color: white;
+        padding: 0.2rem;
+        padding-right: 1rem;
+      }
+    </style>
+
+    <title>Score</title>
+  </head>
+  <body style="text-align: center;">
+    <table style="background-color: rgba(0, 0, 0, 0.65); color: orangered; width: 100%;">
+      <tr>
+        <th class="local_name">LOCAL</th>
+        <td class="score local_score">0</td>
+      </tr>
+      <tr>
+        <th class="visitor_name">VISITOR</th>
+        <td class="score visitor_score">0</td>
+      </tr>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+    <script src="/js/firebase_config.js"></script>
+
+    <script src="js/common.js"></script>
+    <script src="js/updater.js"></script>
+    <script>
+      InitListener();
+    </script>
+  </body>
+</html>

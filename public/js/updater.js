@@ -15,8 +15,6 @@ function InitListener() {
     db.collection("game").doc("game").onSnapshot((doc) => {
         console.log("Current data: ", doc.data());
         UpdateScoreboard(doc.data());
-    }).catch((error) => {
-        console.log(error.message);
     });
 }
 function UpdateScoreboard(_data) {

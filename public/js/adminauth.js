@@ -8,17 +8,8 @@ function Login() {
     const password = document.getElementById("auth_password").value;
     firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
         console.log("AUTH COMPLETED");
-        //window.location.href = "/admin";
+        window.location.href = "/admin";
     }).catch((error) => {
         SetError("auth_error",error.message);
     });
 }
-
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        console.log(user.uid);
-    } else {
-        console.log("NO USER");
-        window.location.href =  "/admin-auth";
-    }
-});

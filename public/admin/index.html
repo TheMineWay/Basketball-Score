@@ -23,11 +23,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#" onclick="Logout()">Logout</a>
+              <a class="nav-link active" aria-current="page" data-bs-toggle="offcanvas" href="#modify_names" role="button" aria-controls="ModifyNames">Modify names</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link super_admin" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#administrative_modal">Administrative actions</a>
             </li>
           </ul>
           <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#" onclick="Logout()">Logout</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="https://github.com/TheMineWay/" target="_blank"><small>Made by TheMineWay</small></a>
               </li>
@@ -47,6 +53,7 @@
             <div class="card-body">
               <h4><span class="local_name"></span>: <span class="local_score"></span></h4>
               <h4><span class="visitor_name"></span>: <span class="visitor_score"></span></h4>
+              <h6>STAGE: <span class="current_stage"></span></h6>
             </div>
           </div>
         </div>
@@ -63,13 +70,13 @@
             <h5 class="card-header"><span class="local_name text-primary"></span> scoreboard manager (local)</h5>
             <div class="card-body">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="input-group mb-3">
                     <button class="material-icons btn btn-danger fast-actions" onclick="Cleanase('local')" hidden>delete</button>
                     <input style="text-align: center;" class="form-control" type="number" id="local_score_input">
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <div class="btn-group" role="group" style="width: 100%;">
                     <button class="material-icons btn btn-primary" onclick="InternalIncrement('local',1)">arrow_upward</button>
                     <button class="material-icons btn btn-primary" onclick="InternalIncrement('local',-1)">arrow_downward</button>
@@ -80,7 +87,7 @@
               </div>
               <div class="fast-actions" hidden>
                 <hr>
-                <p>These fast actions (are automatically sent to the public scoreboard)</p>
+                <p>These fast actions are automatically sent to the public scoreboard.</p>
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <button class="btn btn-primary" style="width: 100%;" onclick="Increment('local',1)">+1</button>
@@ -102,13 +109,13 @@
             <h5 class="card-header"><span class="visitor_name text-primary"></span> scoreboard manager (visitor)</h5>
             <div class="card-body">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="input-group mb-3">
                     <button class="material-icons btn btn-danger fast-actions" onclick="Cleanase('visitor')" hidden>delete</button>
                     <input style="text-align: center;" class="form-control" type="number" id="visitor_score_input">
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <div class="btn-group" role="group" style="width: 100%;">
                     <button class="material-icons btn btn-primary" onclick="InternalIncrement('visitor',1)">arrow_upward</button>
                     <button class="material-icons btn btn-primary" onclick="InternalIncrement('visitor',-1)">arrow_downward</button>
@@ -119,7 +126,7 @@
               </div>
               <div class="fast-actions" hidden>
                 <hr>
-                <p>These fast actions (are automatically sent to the public scoreboard)</p>
+                <p>These fast actions are automatically sent to the public scoreboard.</p>
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <button class="btn btn-primary" style="width: 100%;" onclick="Increment('visitor',1)">+1</button>
@@ -135,10 +142,102 @@
             </div>
           </div>
         </div>
+        <!-- STAGE CONTROLLER -->
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header">Stage controller</div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col-md-4">                  
+                  <input type="number" id="stage_input" placeholder="Current stage..." class="form-control" style="text-align: center;">
+                </div>
+                <div class="col-md-8">
+                  <div class="btn-group" role="group" style="width: 100%;">
+                    <button class="material-icons btn btn-primary" onclick="IncrementStage(1)">arrow_upward</button>
+                    <button class="material-icons btn btn-primary" onclick="IncrementStage(-1)">arrow_downward</button>
+                    <button class="material-icons btn btn-primary" onclick="DisplayStage()">history</button>
+                    <button class="material-icons btn btn-primary" onclick="SendInputStage()" id="stage_send">send</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row fast-actions" hidden>
+                <hr>
+                <p>These fast actions are automatically sent to the public scoreboard.</p>
+                <div class="col-md-3">
+                  <button class="btn btn-primary" style="width: 100%;" onclick="SendStage(1)">1</button>
+                </div>
+                <div class="col-md-3">
+                  <button class="btn btn-primary" style="width: 100%;" onclick="SendStage(2)">2</button>
+                </div>
+                <div class="col-md-3">
+                  <button class="btn btn-primary" style="width: 100%;" onclick="SendStage(3)">3</button>
+                </div>
+                <div class="col-md-3">
+                  <button class="btn btn-primary" style="width: 100%;" onclick="SendStage(4)">4</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- DOCUMENTATION DISPLAY -->
+        <!--<div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header">Stage controller</div>
+            <div class="card-body">
+              
+            </div>
+          </div>
+        </div>-->
       </div>
     </section>
 
     <!-- END PRACTICAL BODY -->
+    <!-- OFFCANVAS -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="modify_names" aria-labelledby="offcanvasLabel" data-bs-backdrop="false" data-bs-scroll="true">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasLabel">Modify names</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="mb-3">
+          <label class="form-label">Local name</label>
+          <input type="text" class="form-control" id="local_name_input">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Visitor name</label>
+          <input type="text" class="form-control" id="visitor_name_input">
+        </div>
+        <div class="mb-3">
+          <div class="row">
+            <div class="col-md-9">
+              <button style="width: 100%;" class="btn btn-primary" onclick="ModifyNames()">Modify names</button>
+            </div>
+            <div class="col-md-3">
+              <button style="width: 100%;" class="btn btn-primary material-icons" onclick="DisplayNames()">history</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END OFFCANVAS -->
+    <!-- REGENERATE BBDD MODAL -->
+    <div class="modal fade" id="administrative_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Administrative actions</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <button class="btn btn-primary" style="width: 100%;" onclick="RegenerateDB()">Regenerate BBDD</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100%;">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END REGENERATE BBDD MODAL -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
@@ -150,5 +249,7 @@
     <script src="/js/common.js"></script>
     <script src="adminpannel.js"></script>
     <script src="../js/updater.js"></script>
+
+    <script src="superadmin.js"></script> <!-- SUPER ADMIN SCRIPT -->
   </body>
 </html>

@@ -1,4 +1,4 @@
-// Your web app's Firebase configuration
+// Your web app's Firebase configuration (you'll need to replace this with yours)
 var firebaseConfig = {
     apiKey: "AIzaSyAnZW0V4wTzTZJS9pVxfkJS32nzkLGYZQg",
     authDomain: "basketballmatchscore.firebaseapp.com",

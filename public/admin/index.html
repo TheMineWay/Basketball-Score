@@ -64,6 +64,31 @@
             <label class="form-check-label" for="fast_actions_enable">Enable fast actions</label>
           </div>
         </div>
+        <!-- TIMER -->
+        <div class="col-md-12 mb-3">
+          <div class="card h-100">
+            <h5 class="card-header" style="text-align: center;">Timer (<span class="current_time">00 : 00</span>)</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-2 mb-3">
+                  <button class="material-icons btn btn-primary" style="width: 100%;" onclick="TimerSendBtn()" id="timer_send">send</button>
+                </div>
+                <div class="col-md-2 mb-3">
+                  <input style="text-align: center;" class="form-control" type="number" id="local_timer_min" value="0">
+                </div>
+                <div class="col-md-2 mb-3">
+                  <input style="text-align: center;" class="form-control" type="number" id="local_timer_sec" value="0">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="btn-group" role="group" style="width: 100%;">
+                    <button class="material-icons btn btn-primary" onclick="TimerPauseBtn()">pause</button>
+                    <button class="material-icons btn btn-primary" onclick="TimerResumeBtn()">play_arrow</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Local scoreboard manager -->
         <div class="col-md-6 mb-3">
           <div class="card h-100">
@@ -143,15 +168,15 @@
           </div>
         </div>
         <!-- STAGE CONTROLLER -->
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
           <div class="card h-100">
             <div class="card-header">Stage controller</div>
             <div class="card-body">
               <div class="row mb-3">
-                <div class="col-md-4">                  
+                <div class="col-md-4 mb-3">                  
                   <input type="number" id="stage_input" placeholder="Current stage..." class="form-control" style="text-align: center;">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 mb-3">
                   <div class="btn-group" role="group" style="width: 100%;">
                     <button class="material-icons btn btn-primary" onclick="IncrementStage(1)">arrow_upward</button>
                     <button class="material-icons btn btn-primary" onclick="IncrementStage(-1)">arrow_downward</button>

@@ -197,3 +197,42 @@ function SendStage(num) {
     DisplayStage();
 }
 document.getElementById("stage_input").addEventListener('input', () => UI_Update());
+
+//TIMER
+let timerState = "pause";
+let timerValues = {
+    timer:{
+        master: {
+            m: 0,
+            s: 0
+        }
+    }
+}
+function TimerSendBtn() {
+    try {
+        timerValues.timer.master.s = parseInt(document.getElementById("local_timer_sec").value,10);
+        timerValues.timer.master.m = parseInt(document.getElementById("local_timer_min").value,10);
+    } catch(error) {
+        console.log(error.message);
+    }
+    timerValues.timer.action = "set" + timerState;
+    timerValues.timer.lastupdate = new Date();
+    DBdoc.update(timerValues).catch((error) => {
+        console.log(error.message);
+    });
+}
+function TimerPauseBtn() {
+    timerState = "pause";
+    SimpleTimerSend();
+}
+function TimerResumeBtn() {
+    timerState = "play";
+    SimpleTimerSend();
+}
+function SimpleTimerSend() {
+    timerValues.timer.action = timerState;
+    timerValues.timer.lastupdate = new Date();
+    DBdoc.update(timerValues).catch((error) => {
+        console.log(error.message);
+    });
+}

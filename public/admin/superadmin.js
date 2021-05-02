@@ -5,7 +5,16 @@ function RegenerateDB() {
         visitor_score:0,
         local_name:"LOCAL",
         visitor_name:"VISITOR",
-        stage:1
+        stage:1,
+        timer: {
+            action:null,
+            master: {
+                m: 5,
+                s: 55
+            },
+            animations: true,
+            lastupdate: new Date()
+        }
     }).then(() => {
         console.log("BBDD UPDATED!");
     }).catch((error) => {
